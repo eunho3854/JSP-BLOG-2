@@ -12,7 +12,7 @@ public class Script {
 		out.println("alert(`"+msg+"`);");
 		out.println("history.back();");
 		out.println("</script>");
-		out.flush();
+		out.flush(); // 버퍼 비우기
 	}
 
 }
