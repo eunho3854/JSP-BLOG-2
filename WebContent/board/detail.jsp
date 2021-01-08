@@ -4,12 +4,15 @@
 <%@ include file="../layout/header.jsp" %>
 
 <div class="container">
+	<c:if test = "${sessionScope.principal.id == dto.userId}">
+		<button class = "btn btn-danger" onClick = "deleteById(${dto.id})">삭제</button>
+	</c:if>
 	
 	<!-- 삭제는 POST -->
 	<!-- 삭제는 AJAX 이용 ! Form으로는 delete 요청을 할 수 없음 -->
 	<!-- 인증 + 권한 (로그인하고 글을 쓴 사람만 삭제 가능 -->
 	<!-- sessionScope.principal.id 비교 dto.userId -->
-	<button class = "btn btn-danger" onClick = "deleteById(${dto.id})">삭제</button>
+	
 	<br />
 	<br />
 	<h6 class="m-2">
@@ -69,12 +72,25 @@
 </div>
 
 <script>
-	function deleteById() {
+	function deleteById(boardId) {
 		// ajax로 delete 요청 (Method:POST)
-		$ajax().done(function(result) {
-			if(result == "ok") {
-				location.href = "index.jsp"
-			}
+		// 요청과 응답을 json
+		var data = {
+			boardId: boardId
+		}
+		
+		$.ajax({
+			type: "POST",
+			url: "/blog/board?cmd=delete",
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		}).done(function(result){
+			if(result.status == "ok") {
+				location.href = "index.jsp";
+			} else {
+				alert("삭제 실패 !");
+			}		
 		});
 	}
 </script>
