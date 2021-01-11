@@ -39,7 +39,7 @@
 					<div class="panel-body">
 						<textarea id = "content" id="reply__write__form" class="form-control" placeholder="write a comment..." rows="2"></textarea>
 						<br>
-							<button onClick="replySave(${sessionScope.principal.id},'${sessionScope.principal.username}',${dto.id})" class="btn btn-primary pull-right">댓글쓰기</button>
+							<button onClick="replySave(${sessionScope.principal.id},'${dto.username}',${dto.id})" class="btn btn-primary pull-right">댓글쓰기</button>
 							
 							
 							
@@ -51,11 +51,13 @@
 							<c:forEach var="reply" items="${replys}">
 								<li id="reply-${reply.id}" class="media">
 									<div class="media-body">
-										<strong class="text-primary">${reply.username}</strong>
+										<strong class="text-primary">${sessionScope.principal.username}</strong>
 										<p>${reply.content}</p>
 									</div>
 									<div class="m-2">
-										<i onclick="deleteReply(${reply.id})" class="material-icons">delete</i>
+										<c:if test="${sessionScope.principal.id == reply.userId }">
+											<i onclick="deleteReply(${reply.id})" class="material-icons">delete</i>
+										</c:if>
 									</div>
 								</li>
 							</c:forEach>
