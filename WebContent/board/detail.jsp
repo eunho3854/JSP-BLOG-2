@@ -48,7 +48,18 @@
 
 						<!-- 댓글 리스트 시작-->
 						<ul id="reply__list" class="media-list">
-							
+							<c:forEach var="reply" items="${replys}">
+								<li id="reply-${reply.id}" class="media">
+									<div class="media-body">
+										<strong class="text-primary">${reply.username}</strong>
+										<p>${reply.content}</p>
+									</div>
+									<div class="m-2">
+										<i onclick="deleteReply(${reply.id})" class="material-icons">delete</i>
+									</div>
+								</li>
+							</c:forEach>
+									
 						</ul>
 						<!-- 댓글 리스트 끝-->
 					</div>
