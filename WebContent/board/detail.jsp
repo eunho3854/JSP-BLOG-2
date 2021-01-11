@@ -37,30 +37,18 @@
 				<div class="panel panel-info">
 					<div class="panel-heading m-2"><b>Comment</b></div>
 					<div class="panel-body">
-						<textarea id="reply__write__form" class="form-control" placeholder="write a comment..." rows="2"></textarea>
+						<textarea id = "content" id="reply__write__form" class="form-control" placeholder="write a comment..." rows="2"></textarea>
 						<br>
-						<button onclick="#" class="btn btn-primary pull-right">댓글쓰기</button>
+							<button onClick="replySave(${sessionScope.principal.id},'${sessionScope.principal.username}',${dto.id})" class="btn btn-primary pull-right">댓글쓰기</button>
+							
+							
+							
 						<div class="clearfix"></div>
 						<hr />
 
 						<!-- 댓글 리스트 시작-->
 						<ul id="reply__list" class="media-list">
-
-								<!-- 댓글 아이템 -->
-								<li id="reply-1" class="media">		
-									<div class="media-body">
-										<strong class="text-primary">홍길동</strong>
-										<p>
-											댓글입니다.
-										</p>
-									</div>
-									<div class="m-2">
-
-										<i onclick="#" class="material-icons">delete</i>
-
-									</div>
-								</li>
-
+							
 						</ul>
 						<!-- 댓글 리스트 끝-->
 					</div>
@@ -72,29 +60,7 @@
 	<!-- 댓글 박스 끝 -->
 </div>
 
-<script>
-	function deleteById(boardId) {
-		// ajax로 delete 요청 (Method:POST)
-		// 요청과 응답을 json
-		var data = {
-			boardId: boardId
-		}
-		
-		$.ajax({
-			type: "POST",
-			url: "/blog/board?cmd=delete",
-			data: JSON.stringify(data),
-			contentType: "application/json; charset=utf-8",
-			dataType: "json"
-		}).done(function(result){
-			if(result.status == "ok") {
-				location.href = "index.jsp";
-			} else {
-				alert("삭제 실패 !");
-			}		
-		});
-	}
-</script>
+<script src="/blog/js/boardDetail.js"></script>
 
 </body>
 </html>

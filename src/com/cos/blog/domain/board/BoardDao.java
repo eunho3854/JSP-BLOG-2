@@ -13,6 +13,7 @@ import com.cos.blog.domain.board.dto.UpdateReqDto;
 
 public class BoardDao {
 	
+	
 	public int update(UpdateReqDto dto) { // 회원가입
 		String sql = "UPDATE board SET title = ?, content = ? WHERE id = ?";
 		Connection conn = DB.getConnection();
